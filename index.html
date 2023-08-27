@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockInfo</title>
+    <link rel="stylesheet" href="style.css">
+     <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+    <div  class="min-h-screen w-full bg-slate-400 ">
+        <div  class="bg-blue-950 flex w-full h-[100px] items-center justify-center relative [@media(max-width:516px)]:flex-col [@media(max-width:516px)]:justify-around">
+            <div class="relative w-[80vw] flex justify-center [@media(max-width:412px)]:flex-col [@media(max-width:412px)]:place-items-center [@media(max-width:412px)]:items-center">
+                <h1 class="text-white font-bold text-[3rem] [@media(min-width:360px)]:text-[2rem] [@media(max-width:697)] [@media(max-width:360px)]:text-[1rem]">Deepak Enterprises</h1>
+                <span class=" text-red-500 font-bold pt-4 absolute bottom-0 translate-x-[178px] [@media(max-width:412px)]:hidden">StockInfo</span>
+            </div>
+            <div >
+                <button onclick="clearAll()" class="clear ">
+                    Clear All
+                </button>
+            </div>
+        </div>
+
+        <!-- <div class="w-[1320px] h-24 rounded bg-blue-100 flex items-center justify-around mx-auto mt-4 mb-4">
+            <span class="font-bold text-xl">Product Name</span>
+            <span class="font-bold text-xl">Cost</span>
+            <span class="font-bold text-xl">Sales</span>
+            <span class="font-bold text-xl">Quantity</span>
+        </div> -->
+        
+        <form action="" class=" flex-wrap rounded bg-blue-100 mt-4 mx-4 flex items-center justify-between">
+            <div class="flex flex-col py-4 px-4 items-center justify-between"> 
+                
+                <label for="Product Name" class="py-2 font-bold font-Mulish text-xl">Product Name</label>
+                <input type="text" name="Product" id="" placeholder="Product Name" class="w-56 h-10 rounded-md bg-blue-50 overflow-hidden" required>
+                </div>
+                <div class="flex flex-col py-4 px-4 items-center justify-between"> 
+                    <label for="Cost" class="py-2 font-bold font-Mulish text-xl">Cost</label>
+                    <input type="number" name="Cost" id="" placeholder="Cost" class="w-40 h-10 rounded-md bg-blue-50 overflow-hidden" required>
+
+                </div>
+                <div class="flex flex-col py-4 px-4 items-center justify-between"> 
+                    <label for="Sales" class="py-2 font-bold font-Mulish text-xl">Sales</label>
+                    <input type="number"  name="Sales" id="" placeholder="Sales" class="w-40 h-10 rounded-md bg-blue-50 overflow-hidden" required>
+
+                </div>
+                <div class="flex flex-col py-4 px-4 items-center justify-between"> 
+                    <label for="Quantity" class="py-2 font-bold font-Mulish text-xl">Quantity</label>
+
+                    <input type="number" name="Quantity" id="" placeholder="Quantity" class="w-40 h-10 rounded-md bg-blue-50 overflow-hidden" required >
+                </div>
+                
+                    <button id="btn" class="w-10 h-24 -translate-x-10">
+                        <img src="solid.svg">
+                    </button>
+                    <button id="upd" onclick="update()" class="w-10 h-24 -translate-x-10">
+                        <img src="update.png">
+                    </button>
+
+                
+            </form>
+            <div id="main" class="flex justify-center items-center flex-col overflow-hidden">
+
+            </div>
+            <!-- <div id="main" class="flex justify-around items-center min-h-[100px] bg-blue-100 mt-[34px] [@media(max-width:520px)]:flex-col">
+                <div class="w-[80vw] flex justify-around items-center [@media(max-width:412px)]:flex-col [@media(max-width:412px)]:gap-[1rem] [@media(max-width:412px)]:mt-[1rem] [@media(max-width:412px)]:mb-[1rem]">
+    
+                    <div class="text-[1rem] font-bold font-Mulish">${element.product}</div>
+                    <div class="text-[1rem] font-bold font-Mulish">${element.cost}</div>
+                    <div class="text-[1rem] font-bold font-Mulish">${element.sales}</div>
+                    <div class="text-[1rem] font-bold font-Mulish">${element.quantity}</div>
+                </div>
+                <div class="[@media(max-width:412px)]:mt-[1rem] [@media(max-width:412px)]:mb-1rem">
+                    <button onclick = 'editData(${i})'>
+                        <img src="pen.png" alt="" class="w-[44px]">
+                    </button>
+                    <button onclick= 'removeData(${i})'>
+                        <img src="trash.png" alt="" class="w-[44px]">
+                    </button>
+                </div>
+            </div> -->
+    </div>
+        
+    
+    <script >
+        // let det = [
+        //     {
+        //         'name' :'adarsh',
+        //         'email' : 'shivsrivas'
+        //     },
+        //     {
+        //         'name' : 'abhishek',
+        //         'email': 'srivastava'
+        //     }
+        // ]
+        // localStorage.setItem("user",JSON.stringify(det));
+        // console.log(localStorage.getItem('user'));
+         let btn = document.getElementById('btn');
+         let upd = document.querySelector("#upd");
+        let main = document.querySelector("#main");
+        let form = document.querySelector("form");
+        form.addEventListener('submit' , (e)=>{
+            e.preventDefault();
+            // console.log(e);
+              let product =e.target.Product.value;
+              let cost = e.target.Cost.value;
+              let sales =e.target.Sales.value;
+              let quantity =e.target.Quantity.value;
+              let count = 0;
+              
+            //   console.log(product,cost,sales,quantity);
+            
+
+            var userdetail = JSON.parse(localStorage.getItem("user")) ?? [];
+            for(let key of userdetail){
+                if(key.product == product){
+                    count = 1;
+                    break;
+                }
+            }
+            if(count == 1){
+                alert("Product detail already exist");
+                form.reset();
+            
+            }
+            else{
+
+                userdetail.push({
+                    'product': product,
+                    'cost': cost,
+                    'sales': sales,
+                    'quantity': quantity
+    
+                    
+                })
+                localStorage.setItem('user',JSON.stringify(userdetail));
+                e.target.reset();
+                display();
+            }
+            
+        });
+        function display(){
+            var userdetail = JSON.parse(localStorage.getItem("user")) ?? [];
+            let final = "";
+            userdetail.forEach((element ,i) => {
+                final += `      
+                <div class=" w-[100vw] flex justify-around items-center min-h-[100px] bg-blue-100 mt-[34px] [@media(max-width:520px)]:flex-col">
+                <div class="w-[80vw] flex justify-around items-center [@media(max-width:412px)]:flex-col [@media(max-width:412px)]:gap-[1rem] [@media(max-width:412px)]:mt-[1rem] [@media(max-width:412px)]:mb-[1rem]">
+    
+                    <div class="text-[1rem] font-bold font-Mulish">${element.product}</div>
+                    <div class="text-[1rem] font-bold font-Mulish">${element.cost}</div>
+                    <div class="text-[1rem] font-bold font-Mulish">${element.sales}</div>
+                    <div class="text-[1rem] font-bold font-Mulish">${element.quantity}</div>
+                </div>
+                <div class="[@media(max-width:412px)]:mt-[1rem] [@media(max-width:412px)]:mb-1rem">
+                    <button onclick = 'editData(${i})'>
+                        <img src="pen.png" alt="" class="w-[44px]">
+                    </button>
+                    <button onclick= 'removeData(${i})'>
+                        <img src="trash.png" alt="" class="w-[44px]">
+                    </button>
+                </div>
+            </div>
+            `
+            });
+            main.innerHTML = final;
+        }
+        display();
+        let removeData = (index)=>{
+            var userdetail = JSON.parse(localStorage.getItem("user")) ?? [];
+            userdetail.splice(index,1);
+            localStorage.setItem('user',JSON.stringify(userdetail));
+            display();
+        }
+        let editData = (index) =>{
+            btn.style.display = 'none';
+            upd.style.display ='block';
+            var userdetail = JSON.parse(localStorage.getItem("user")) ?? [];
+            form.Product.value = userdetail[index].product;
+            removeData(index);
+         }
+        upd.addEventListener('submit', ()=>{
+            
+            userdetail[index].cost = buttn.Cost.value;
+            userdetail[index].sales = buttn.Sales.value;
+            userdetail[index].quantity = buttn.quantity.value;
+            localStorage.setItem('user',JSON.stringify(userdetail));
+        })
+        upd.addEventListener('click' , () => {
+            btn.style.display = 'block';
+            upd.style.display = 'none';
+        
+        })
+        let clearAll = ()=> {
+            localStorage.clear();
+            display();
+        }
+
+    </script>
+</body>
+
+</html>

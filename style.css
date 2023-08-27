@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.margin{
+    margin-left: 30rem;
+}
+  ::placeholder {
+    
+    padding-left: 1.5rem;
+    
+    font-size: 1rem;
+    line-height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    transform: translateY(-50%);
+  }
+   input[type="text"]{
+   
+    /* background-color: transparent; */
+    /* outline: none; */
+    /* border: none; */
+    /* padding: 1rem; */
+    color: red;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 30px;
+    letter-spacing: 1px;
+    padding-left: 3rem;
+  }
+   input[type="number"]{
+   
+    /* background-color: transparent; */
+    /* outline: none; */
+    /* border: none; */
+    /* padding: 1rem; */
+    color: red;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 30px;
+    letter-spacing: 1px;
+    padding-left: 3rem;
+  }
+  /* label{
+    display: block;
+  } */
+  #upd{
+    display: none;
+  }
+  .clear {
+    color:whitesmoke;
+    /* border: 2px solid black; */
+    border-radius: 5px;
+    background-color: lightskyblue;
+    padding: 0.1rem 1rem;
+    /* transform: translateX(400px); */
+    box-shadow: inset;
+  }
+  .clear:hover{
+       opacity: 0.8;
+       
+  }
+
